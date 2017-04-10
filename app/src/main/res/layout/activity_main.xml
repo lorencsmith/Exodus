@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.lorensmith.exodus.MainActivity">
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exodus"
+        android:textSize="40sp"
+        android:gravity="center"
+        />
+ <RadioGroup
+     android:id="@+id/rdg"
+     android:layout_width="match_parent"
+     android:layout_height="350dp">
+
+     <RadioButton
+         android:id="@+id/rdb1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Picture Gallery"
+         android:onClick="onRadioButtonClicked"/>
+     <RadioButton
+         android:id="@+id/rdb2"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Files"
+         android:onClick="onRadioButtonClicked"/>
+     <RadioButton
+         android:id="@+id/rdb3"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Animation"
+         android:onClick="onRadioButtonClicked"/>
+     <RadioButton
+         android:id="@+id/rdb4"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Custom"
+         android:onClick="onRadioButtonClicked"/>
+
+ </RadioGroup>
+
+</LinearLayout>
