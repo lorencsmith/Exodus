@@ -35,7 +35,7 @@
          android:id="@+id/rdb3"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="Animation"
+         android:text="Video Player"
          android:onClick="onRadioButtonClicked"/>
      <RadioButton
          android:id="@+id/rdb4"

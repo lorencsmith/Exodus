@@ -49,33 +49,31 @@ public class MainActivity extends BaseActivity{
             if (checked)
                 toFiles();
                 break;
+
         case R.id.rdb3:
             if(checked)
-                toAnimation();
+                toPlayer();
                 break;
         case R.id.rdb4:
             if(checked)
                 toCustom();
                 break;
-
     }
 }
 
-
-
-
-    private void toAnimation() {
-        toActivity(AnimationActivity.class);
+    private void toPlayer() {
+        toActivity(VideoPlayerActivity.class);
+        overridePendingTransition(R.anim.down_in, R.anim.down_out);
         Bundle bundle = new Bundle();
-        bundle.putString("msg", "To Animation");
+        bundle.putString("msg", "To Files List");
         Message msg = Message.obtain();
         msg.what = MSG;
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
-
     private void toFiles() {
         toActivity(FileList.class);
+        overridePendingTransition(R.anim.down_in, R.anim.down_out);
         Bundle bundle = new Bundle();
         bundle.putString("msg", "To Files List");
         Message msg = Message.obtain();
@@ -86,6 +84,7 @@ public class MainActivity extends BaseActivity{
 
     private void toPics() {
         toActivity(PictureGallery.class);
+        overridePendingTransition(R.anim.up_in, R.anim.up_out);
         Bundle bundle = new Bundle();
         bundle.putString("msg", "To Picture Gallery");
         Message msg = Message.obtain();
