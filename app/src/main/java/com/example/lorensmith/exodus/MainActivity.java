@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity{
         toActivity(VideoPlayerActivity.class);
         overridePendingTransition(R.anim.down_in, R.anim.down_out);
         Bundle bundle = new Bundle();
-        bundle.putString("msg", "To Files List");
+        bundle.putString("msg", "To Video Player");
         Message msg = Message.obtain();
         msg.what = MSG;
         msg.setData(bundle);
