@@ -24,9 +24,35 @@
         android:layout_height="300dp"
         android:src="@mipmap/exodus"
         android:scaleType="centerInside"/>
-
-    <Button
+    <TextView
+        android:id="@+id/question"
         android:layout_below="@id/custompic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Would you see this movie?"
+        android:textSize="30sp"
+        android:gravity="center"/>
+    <RadioGroup
+        android:id="@+id/yes_no"
+        android:layout_below="@id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <RadioButton
+            android:id="@+id/yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            />
+        <RadioButton
+            android:id="@+id/no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No"
+            />
+            </RadioGroup>
+    <Button
+        android:layout_below="@id/yes_no"
         android:id="@+id/dialog_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

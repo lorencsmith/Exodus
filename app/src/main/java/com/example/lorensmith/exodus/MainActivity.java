@@ -95,7 +95,6 @@ public class MainActivity extends BaseActivity{
     }
 
     private void toCustom(){
-
             final Custom dialog = new Custom(this, new Custom.ICustomDialogEventListener() {
 
                 @Override

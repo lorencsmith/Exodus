@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lorensmith.exodus.simpleGestureListener;
 import com.example.lorensmith.exodus.adapter.ListViewAdapter;
 import com.example.lorensmith.exodus.util.UtilLog;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class FileList extends BaseActivity implements View.OnTouchListener  {
     private ListView fileView;
     private ArrayList<String> fileList;
+
     private GestureDetector mGestureDetector;
 
 
@@ -34,8 +36,8 @@ public class FileList extends BaseActivity implements View.OnTouchListener  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
-        fileList = new ArrayList<String>();
         mGestureDetector = new GestureDetector(this, new simpleGestureListener());
+        fileList = new ArrayList<String>();
         createFileList();
         initialView();
 
@@ -72,8 +74,8 @@ public class FileList extends BaseActivity implements View.OnTouchListener  {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(position == 0){
-            toastShort("FileList");
-        }else if(position == 27){
+            toastShort("File List");
+        }else if(position == fileList.size()+1){
             toastShort("EOF");
         }else {
             toastShort("File # " + String.valueOf(position) + " clicked.");
@@ -82,55 +84,12 @@ public class FileList extends BaseActivity implements View.OnTouchListener  {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-        return mGestureDetector.onTouchEvent(event);
-    }
-
-    /*onDown ->onShowPress->onLongPress*/
-    private class simpleGestureListener extends GestureDetector.SimpleOnGestureListener {
-        public boolean onDown(MotionEvent e) {
-
-            toastShort("onDownPress");
+        boolean test = mGestureDetector.onTouchEvent(event);
+        if(test){
+            toastShort(simpleGestureListener.currentGestureDetected);
             return true;
-        }
-        public void onShowPress(MotionEvent e){
-
-            toastShort("onShowPress");
-        }
-        public void onLongPress(MotionEvent e){
-
-            toastShort("onLongPress");
-        }
-
-        public boolean onSingleTapUp(MotionEvent e){
-
-            toastShort("onSingleTapUp");
-            return true;
-        }
-        public boolean onSingleTapConfirmed(MotionEvent e){
-
-            toastShort("onSingleTapConfirmed");
-            return true;
-        }
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY){
-
-            toastShort("onScroll");
-            return true;
-        }
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
-            if (e1.getX() > e2.getX()) {
-                UtilLog.logD("MyGesture", "Swiped Left");
-            }
-            return true;
-        }
-        public boolean onDoubleTap(MotionEvent e){
-
-            toastShort("onDoubleTap");
-            return true;
-        }
-        public boolean onDoubleTapEvent(MotionEvent e){
-            toastShort("onDoubleTapEvent");
-            return true;
+        }else{
+            return false;
         }
     }
 
