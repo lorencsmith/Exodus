@@ -1,28 +1,51 @@
 package com.example.lorensmith.exodus;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.MediaController;
-import android.widget.VideoView;
+import android.widget.Toast;
+
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayer.Provider;
+import com.google.android.youtube.player.YouTubePlayerView;
+
 
 /**
  * Created by lorensmith on 4/9/17.
  */
 
-public class VideoPlayerActivity extends AppCompatActivity{
+public class VideoPlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
+    public static final String API_KEY = "AIzaSyDX7nOWhTEeT13ENsOLOs2O3V6_jx0Yb6o";
+    private static final int RECOVERY_REQUEST = 1;
+    YouTubePlayerView videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        VideoView videoView = (VideoView) findViewById(R.id.videoView);
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoView);
-        Uri uri = Uri.parse("rtsp://r6---sn-vgqsens7.googlevideo.com/Cj0LENy73wIaNAlSxV_pshjvtxMYDSANFC3azO5YMOCoAUIASARg76vVu6eHn95YigELNWNwU3prT0RkbUEM/B4D4B5065A6155256245AA13DFB887BC105CAEC3.972D8E497EB9622207699BF292E0DCCA55EE7206/yt6/1/video.3gp");
-        videoView.setMediaController(mediaController);
-        videoView.setVideoURI(uri);
-        videoView.requestFocus();
-        videoView.start();
+        videoView = (YouTubePlayerView) findViewById(R.id.videoView);
+        videoView.initialize(API_KEY, this);
+
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean check) {
+        if(!check){
+            youTubePlayer.cueVideo("t-8YsulfxVI");
+        }
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
+        } else {
+            String error = String.format(getString(R.string.player_error), errorReason.toString());
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        }
+    }
+    protected Provider getYouTubePlayerProvider() {
+        return videoView;
     }
 }
